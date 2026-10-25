@@ -1,0 +1,238 @@
+/* 1. Colour palette stored as variables so we can reuse them */
+:root {
+  --pine: #0f3d3e;
+  --mist: #eef2ef;
+  --chalk: #fbfcfa;
+  --ink: #1b2a2a;
+  --signal: #e8590c;
+  --line: #d5ddd8;
+}
+
+/* 2. Reset: padding and border count inside an element's width */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font: 16px/1.5 system-ui, "Segoe UI", sans-serif;
+  background: var(--mist);
+  color: var(--ink);
+}
+
+h1, h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  margin: 0.2em 0 0.5em;
+}
+
+/* 3. Two-column layout: intro text on the left, form on the right */
+.hero {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 3rem;
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+  align-items: center;
+}
+
+.hero h1 {
+  font-size: 2.8rem;
+  line-height: 1.1;
+  color: var(--pine);
+}
+
+/* 4. The white card that holds the form */
+.box {
+  background: var(--chalk);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1.2em;
+}
+
+/* 5. Form controls */
+input {
+  font: inherit;
+  width: 100%;
+  padding: 0.55em 0.7em;
+  margin: 0.25em 0 0.6em;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+}
+
+button {
+  font: inherit;
+  background: var(--pine);
+  color: #fff;
+  border: 0;
+  padding: 0.55em 1.1em;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #175557;
+}
+
+/* 6. Visible outline for keyboard users (Tab key) */
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--signal);
+  outline-offset: 2px;
+}
+
+#error {
+  color: #b42318;
+  min-height: 1.4em;
+}
+
+/* 7. On phones, stack the two columns */
+@media (max-width: 760px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 2rem 1rem;
+  }
+}
+
+/* ---------- Dashboard layout ---------- */
+#app {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 230px;
+  flex-shrink: 0;
+  background: var(--pine);
+  color: #fff;
+  padding: 1.4rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.sidebar h2 { font-size: 1.25rem; margin: 0; }
+.who small { color: #9fc2bf; }
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin: 1rem 0;
+  flex: 1;               /* pushes the logout button to the bottom */
+}
+
+.sidebar a {
+  color: #dbeceb;
+  text-decoration: none;
+  padding: 0.55em 0.8em;
+  border-radius: 6px;
+}
+
+.sidebar a.active {
+  background: #fff;
+  color: var(--pine);
+  border-left: 4px solid var(--signal);
+  font-weight: 600;
+}
+
+.sidebar button {
+  background: transparent;
+  border: 1px solid #6e9996;
+}
+
+main {
+  flex: 1;
+  padding: 2rem;
+  min-width: 0;
+}
+
+@media (max-width: 760px) {
+  #app { flex-direction: column; }
+  .sidebar { width: 100%; }
+  .sidebar nav { flex-direction: row; flex-wrap: wrap; }
+  main { padding: 1rem; }
+}
+
+/* ---------- Dashboard content ---------- */
+h3 { font-family: Georgia, "Times New Roman", serif; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  background: var(--chalk);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1.1em;
+}
+
+.card h3 { font-size: 2rem; margin: 0; color: var(--pine); }
+.card p  { margin: 0; color: #4b5f5c; }
+
+.notice {
+  background: var(--chalk);
+  border-left: 4px solid var(--signal);
+  padding: 0.8em 1em;
+  margin: 0.8em 0;
+  border-radius: 0 8px 8px 0;
+  max-width: 720px;
+}
+.notice p { margin: 0.3em 0; }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  background: var(--chalk);
+  border: 1px solid var(--line);
+}
+th, td {
+  padding: 0.65em 0.9em;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+}
+th { background: #e1e9e4; }
+
+.ok  { color: #146c2e; font-weight: 600; }
+.low { color: #b42318; font-weight: 600; }
+
+button.danger {
+  background: #fff;
+  color: #b42318;
+  border: 1px solid #b42318;
+  padding: 0.25em 0.7em;
+}
+
+/* ---------- Forms inside dashboards ---------- */
+select, textarea {
+  font: inherit;
+  width: 100%;
+  padding: 0.55em 0.7em;
+  margin: 0.25em 0 0.6em;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+}
+
+select:focus-visible, textarea:focus-visible {
+  outline: 3px solid var(--signal);
+  outline-offset: 2px;
+}
+
+.box { max-width: 620px; margin: 1em 0; }
+
+.box input[type="checkbox"] { width: auto; margin: 0 0.6em 0 0; }
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4em 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.row input[type="number"] { width: 90px; margin: 0; }
